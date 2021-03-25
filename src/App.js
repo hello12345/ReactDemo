@@ -1,24 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-
+import {useState} from 'react';
+import { KanbanComponent, ColumnsDirective, ColumnDirective } from "@syncfusion/ej2-react-kanban";
+import { kanbanData } from './Data/datasource.json';
 function App() {
+  const [data,setData]=useState(kanbanData,null,true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+       <KanbanComponent id="kanban" keyField="Status" dataSource={data} cardSettings={{ contentField: "Summary", headerField: "Id", showHeader: false }}>
+                <ColumnsDirective>
+                  <ColumnDirective headerText="To Do" keyField="Open"/>
+                  <ColumnDirective headerText="In Progress" keyField="InProgress"/>
+                  <ColumnDirective headerText="Testing" keyField="Testing"/>
+                  <ColumnDirective headerText="Done" keyField="Close"/>
+                </ColumnsDirective>
+            </KanbanComponent>
+      
+    
   );
 }
 
